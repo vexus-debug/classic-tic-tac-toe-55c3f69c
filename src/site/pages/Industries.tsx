@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import Layout from "@/site/components/Layout";
-import PageHero from "@/site/components/PageHero";
+import { ClinicalHero } from "@/site/components/heroes";
+import heroClinic from "@/assets/site/hero-clinic.jpg";
+import hubShotAsset from "@/assets/current-dashboard/dental-dashboard.png.asset.json";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -171,11 +173,13 @@ const Industries = () => {
 
   return (
     <Layout>
-      <PageHero
-        eyebrow="Industries we serve"
+      <ClinicalHero
+        kicker="Industries we serve"
         title="Built for your kind of clinic."
         description="We know every specialty is different. That's why Clinexus adapts to your workflows, not the other way around. Find your practice below."
-        primaryCta={{ label: "Get Started", href: "https://wa.me/2349017758165?text=Hello%20I%20would%20like%20to%20know%20more%20about%20Clinexus", external: true }}
+        photo={{ src: heroClinic, alt: "Receptionist welcoming a patient at a modern clinic front desk" }}
+        card={{ src: hubShotAsset.url, alt: "Clinexus clinic dashboard", caption: "One workspace for patients, billing, stock and staff" }}
+        primary={{ label: "Get Started", href: "https://wa.me/2349017758165?text=Hello%20I%20would%20like%20to%20know%20more%20about%20Clinexus", external: true }}
         points={[
           { value: "11+", label: "Specialties supported out of the box" },
           { value: "24 hrs", label: "From signup to a live clinic workspace" },

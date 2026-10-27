@@ -1,5 +1,6 @@
 import Layout from "@/site/components/Layout";
-import { PriceHero } from "@/site/components/heroes";
+import { ClinicalHero, FigurePanel } from "@/site/components/heroes";
+import heroPhoto from "@/assets/site/hero-dental-desk.jpg";
 import { CheckCircle2, XCircle } from "lucide-react";
 
 const WHATSAPP = "https://wa.me/2349017758165?text=Hello%20I%20have%20a%20question%20about%20Clinexus%20per-case%20pricing";
@@ -40,19 +41,18 @@ const faqs = [
 
 const DentalCasesExplained = () => (
   <Layout>
-    <PriceHero
+    <ClinicalHero
       kicker="How per-case pricing works"
       title="₦1,000 per patient case, explained simply."
       description="One case covers one patient for 30 days, up to 3 visits — everything in between is included."
       primary={{ label: "Ask us on WhatsApp", href: WHATSAPP, external: true }}
       secondary={{ label: "Back to pricing", href: "/industries/dental-clinics/pricing" }}
-      figure="30"
-      unit="days per case"
-      ledger={[
+      photo={{ src: heroPhoto, alt: "Patient paying at a dental clinic front desk" }}
+      aside={<FigurePanel figure="30" unit="days per case" ledger={[
         { term: "Covers", detail: "One patient" },
         { term: "Visits", detail: "Up to 3 within the 30 days" },
         { term: "Included", detail: "Everything in between those visits" },
-      ]}
+      ]} />}
     />
     <div className="mx-auto max-w-3xl space-y-12 px-4 py-12 sm:px-6">
       <section>
