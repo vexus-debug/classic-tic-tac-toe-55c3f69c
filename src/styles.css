@@ -916,3 +916,18 @@ html.dashboard-dark { background-color: hsl(215 32% 8%); color-scheme: dark; }
   --color-info: hsl(var(--info));
   --color-info-foreground: hsl(var(--info-foreground));
 }
+
+/* ── Photo-backdrop page headers (industry pages) ── */
+:root {
+  --hero-scrim: 197 43% 6%;
+  --hero-on: 0 0% 100%;
+}
+@utility text-hero-on { color: hsl(var(--hero-on)); }
+@utility text-hero-on-muted { color: hsl(var(--hero-on) / 0.8); }
+@utility border-hero-on { border-color: hsl(var(--hero-on) / 0.22); }
+@utility hero-scrim {
+  background: linear-gradient(180deg, hsl(var(--hero-scrim) / 0.55) 0%, hsl(var(--hero-scrim) / 0.88) 42%, hsl(var(--hero-scrim) / 0.97) 100%);
+  @media (min-width: 1024px) {
+    background: linear-gradient(90deg, hsl(var(--hero-scrim) / 0.95) 0%, hsl(var(--hero-scrim) / 0.8) 42%, hsl(var(--hero-scrim) / 0.3) 100%);
+  }
+}

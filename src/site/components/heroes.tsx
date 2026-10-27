@@ -319,3 +319,81 @@ export const LegalHero = ({
     </div>
   </section>
 );
+
+/* 6 ── Industry pages: clinic photo backdrop + floating product card ───── */
+export const ClinicalHero = ({
+  kicker, title, description, primary, secondary, photo, card, aside, points = [],
+}: {
+  kicker: string; title: string; description: string;
+  primary?: HeroCta; secondary?: HeroCta;
+  photo: { src: string; alt: string };
+  card?: { src: string; alt: string; caption: string };
+  aside?: ReactNode;
+  points?: HeroPoint[];
+}) => (
+  <section className="relative isolate overflow-hidden bg-medical-navy">
+    <img
+      src={photo.src}
+      alt={photo.alt}
+      width={1920}
+      height={1088}
+      loading="eager"
+      fetchPriority="high"
+      className="absolute inset-0 -z-20 h-full w-full object-cover object-[72%_center]"
+    />
+    <div className="hero-scrim absolute inset-0 -z-10" />
+    <div className="container grid items-center gap-10 py-14 md:py-20 lg:min-h-[620px] lg:grid-cols-12 lg:gap-12 lg:py-24">
+      <motion.div {...rise()} className="lg:col-span-6">
+        <p className="inline-flex items-center rounded-full border border-hero-on px-3 py-1 text-xs font-medium text-hero-on">{kicker}</p>
+        <h1 className="mt-5 text-[2rem] leading-[1.08] text-hero-on sm:text-4xl md:text-5xl lg:text-[3.25rem]" style={{ textWrap: "balance" }}>{title}</h1>
+        <p className="mt-6 max-w-xl text-base leading-relaxed text-hero-on-muted md:text-lg">{description}</p>
+        {(primary || secondary) && (
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-6">
+            {primary && go(primary, <Button size="lg" className="h-12 w-full gap-2 rounded-md px-7 sm:w-auto">{primary.label} <ArrowRight className="h-4 w-4" /></Button>)}
+            {secondary && go(secondary, <span className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-hero-on underline-offset-4 hover:underline">{secondary.label} <ArrowUpRight className="h-3.5 w-3.5" /></span>)}
+          </div>
+        )}
+      </motion.div>
+      {(card || aside) && (
+        <motion.div {...rise(0.15)} className="lg:col-span-6">
+          {aside ?? (card && (
+            <figure className="rounded-xl border border-hero-on bg-background/95 p-1.5 shadow-2xl backdrop-blur lg:translate-x-6">
+              <img src={card.src} alt={card.alt} className="block w-full rounded-lg" loading="eager" />
+              <figcaption className="px-3 py-2.5 text-xs text-muted-foreground">{card.caption}</figcaption>
+            </figure>
+          ))}
+        </motion.div>
+      )}
+    </div>
+    {points.length > 0 && (
+      <dl className="border-t border-hero-on">
+        <div className="container grid grid-cols-3 divide-x divide-[hsl(var(--hero-on)/0.22)]">
+          {points.map((p) => (
+            <div key={p.label} className="px-3 py-5 first:pl-0 sm:px-6 md:py-6">
+              <dt className="text-xl font-semibold tracking-tight text-hero-on md:text-3xl">{p.value}</dt>
+              <dd className="mt-1 text-xs leading-snug text-hero-on-muted md:text-sm">{p.label}</dd>
+            </div>
+          ))}
+        </div>
+      </dl>
+    )}
+  </section>
+);
+
+/* Glass figure panel for pricing pages, used as ClinicalHero `aside`. */
+export const FigurePanel = ({ figure, unit, ledger }: { figure: string; unit: string; ledger: { term: string; detail: string }[] }) => (
+  <div className="rounded-xl border border-hero-on bg-background/95 p-6 shadow-2xl backdrop-blur md:p-9">
+    <div className="flex items-end gap-3 border-b border-border pb-6">
+      <span className="text-5xl font-semibold leading-none tracking-tight text-foreground md:text-7xl">{figure}</span>
+      <span className="pb-1.5 text-sm text-muted-foreground">{unit}</span>
+    </div>
+    <dl className="divide-y divide-border">
+      {ledger.map((row) => (
+        <div key={row.term} className="grid grid-cols-[6.5rem_1fr] gap-3 py-3.5 text-sm">
+          <dt className="font-medium text-foreground">{row.term}</dt>
+          <dd className="text-muted-foreground">{row.detail}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+);
