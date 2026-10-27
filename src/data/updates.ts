@@ -13,6 +13,15 @@ export interface UpdateEntry {
 
 export const updates: UpdateEntry[] = [
   {
+    version: "v2.2.5",
+    date: "October 27, 2026",
+    title: "Refreshed dental clinic page",
+    kind: "improvement",
+    items: [
+      { kind: "improvement", text: "The dental clinic page now shows features in a mixed-size layout and walks through a patient's visit step by step, swipeable on phones." },
+    ],
+  },
+  {
     version: "v2.2.4",
     date: "October 27, 2026",
     title: "New photo headers on industry pages",
