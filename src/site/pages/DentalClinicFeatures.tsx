@@ -1,5 +1,7 @@
 import Layout from "@/site/components/Layout";
-import PageHero from "@/site/components/PageHero";
+import { ClinicalHero } from "@/site/components/heroes";
+import heroPhoto from "@/assets/site/hero-dental.jpg";
+import heroShotAsset from "@/assets/current-dashboard/dental-charts.png.asset.json";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { LocalSeo } from "@/site/components/LocalSeo";
@@ -207,12 +209,14 @@ const roles = [
 const DentalClinicFeatures = () => {
   return (
     <Layout>
-      <PageHero
-        eyebrow="Clinexus for dental clinics, Features"
+      <ClinicalHero
+        kicker="Clinexus for dental clinics, Features"
         title="Everything your dental practice runs on, in one workspace."
         description="Clinexus is a multi-clinic platform, dental, eye care and diagnostic centres. A dental practice gets its own workspace with a sidebar built around dentistry, plus every part of running a practice underneath it. Here's what that gives you, day to day."
-        primaryCta={{ label: "Talk to us on WhatsApp", href: WHATSAPP, external: true }}
-        secondaryCta={{ label: "See the dental clinic overview", href: "/industries/dental-clinics" }}
+        photo={{ src: heroPhoto, alt: "Dentist treating a smiling patient in a modern dental operatory" }}
+        card={{ src: heroShotAsset.url, alt: "Per-tooth charting with condition colours", caption: "Per-tooth charting with condition colours" }}
+        primary={{ label: "Talk to us on WhatsApp", href: WHATSAPP, external: true }}
+        secondary={{ label: "See the dental clinic overview", href: "/industries/dental-clinics" }}
         points={[
           { value: "30+", label: "Modules covering every part of the practice" },
           { value: "1", label: "Workspace for clinical work and the money side" },

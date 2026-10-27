@@ -1,5 +1,7 @@
 import Layout from "@/site/components/Layout";
-import PageHero from "@/site/components/PageHero";
+import { ClinicalHero } from "@/site/components/heroes";
+import heroPhoto from "@/assets/site/hero-eye.jpg";
+import heroShotAsset from "@/assets/current-dashboard/eye-exams.png.asset.json";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { LocalSeo } from "@/site/components/LocalSeo";
@@ -189,12 +191,14 @@ const roles = [
 const EyeClinicFeatures = () => {
   return (
     <Layout>
-      <PageHero
-        eyebrow="Clinexus for eye clinics, Features"
+      <ClinicalHero
+        kicker="Clinexus for eye clinics, Features"
         title="Everything your eye clinic runs on, in one workspace."
         description="Clinexus is a multi-clinic platform, dental, eye care and diagnostic centres. An eye clinic gets its own workspace with a sidebar built around eye care, plus every part of running a practice underneath it. Here's what that gives you, day to day."
-        primaryCta={{ label: "Talk to us on WhatsApp", href: WHATSAPP, external: true }}
-        secondaryCta={{ label: "See the eye clinic overview", href: "/industries/eye-clinics" }}
+        photo={{ src: heroPhoto, alt: "Optometrist examining a patient at a slit lamp" }}
+        card={{ src: heroShotAsset.url, alt: "Eye exams with refraction and findings", caption: "Eye exams with refraction and findings" }}
+        primary={{ label: "Talk to us on WhatsApp", href: WHATSAPP, external: true }}
+        secondary={{ label: "See the eye clinic overview", href: "/industries/eye-clinics" }}
         points={[
           { value: "20+", label: "Modules covering every part of the practice" },
           { value: "1", label: "Workspace for clinical work and the money side" },
