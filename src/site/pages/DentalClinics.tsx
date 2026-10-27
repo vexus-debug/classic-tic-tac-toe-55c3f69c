@@ -134,20 +134,52 @@ const DentalClinics = () => {
             <motion.p initial="hidden" whileInView="show" viewport={viewport} variants={reveal} className="mb-10 max-w-2xl text-muted-foreground">
               One simple place for your patients, your appointments, your money and your stock — instead of the folders, notebooks and endless chats that eat your evenings.
             </motion.p>
-            <div className="mb-16 grid gap-6 md:grid-cols-2 lg:mb-24">
-              {modules.map((item, i) => (
-                <motion.article key={item.name} initial="hidden" whileInView="show" viewport={viewport} variants={slide(i % 2 === 0 ? "left" : "right")} whileHover={{ y: -5 }} className="eye-panel min-w-0 flex flex-col rounded-2xl p-5 sm:rounded-3xl sm:p-7">
-                  <Screenshot src={item.shot} alt={item.shotAlt} />
-                  <div className="mb-5 flex items-center justify-between">
-                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10"><item.icon className="h-5 w-5 text-primary" /></div>
-                    <span className="font-display text-3xl font-bold text-primary/25">{String(i + 1).padStart(2, "0")}</span>
-                  </div>
-                  <h3 className="mb-2 text-xl font-bold text-card-foreground">{item.name}</h3>
-                  <p className="mb-3 font-medium text-primary">{item.benefit}</p>
-                  <p className="text-sm leading-relaxed text-muted-foreground">{item.body}</p>
-                </motion.article>
-              ))}
+            <div className="mb-16 grid grid-cols-1 gap-4 md:grid-cols-6 lg:mb-24">
+              {modules.map((item, i) => {
+                const span = ["md:col-span-4", "md:col-span-2", "md:col-span-2", "md:col-span-4", "md:col-span-3", "md:col-span-3"][i];
+                const wide = i === 0 || i === 3;
+                return (
+                  <motion.article key={item.name} initial="hidden" whileInView="show" viewport={viewport} variants={reveal} className={`eye-panel group min-w-0 overflow-hidden rounded-2xl sm:rounded-3xl ${span} ${wide ? "lg:grid lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-6" : "flex flex-col"} p-5 sm:p-6`}>
+                    <div className={wide ? "lg:order-2" : ""}>
+                      <Screenshot src={item.shot} alt={item.shotAlt} />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="mb-3 flex items-center gap-3">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10"><item.icon className="h-5 w-5 text-primary" /></div>
+                        <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">{String(i + 1).padStart(2, "0")} · {item.name}</span>
+                      </div>
+                      <h3 className="mb-2 text-lg font-bold leading-snug text-card-foreground sm:text-xl">{item.benefit}</h3>
+                      <p className="text-sm leading-relaxed text-muted-foreground">{item.body}</p>
+                    </div>
+                  </motion.article>
+                );
+              })}
             </div>
+          </section>
+
+          <section className="mb-16 lg:mb-24">
+            <motion.p initial="hidden" whileInView="show" viewport={viewport} variants={reveal} className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-primary">A patient's visit</motion.p>
+            <motion.h2 initial="hidden" whileInView="show" viewport={viewport} variants={reveal} className="mb-8 text-2xl font-bold text-foreground md:text-3xl">
+              From the front door to the payment, <span className="text-muted-foreground">one record the whole way</span>
+            </motion.h2>
+            <ol className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-5 md:overflow-visible md:px-0">
+              {[
+                { icon: CalendarClock, t: "Booked", d: "Chair and dentist reserved, reminder sent." },
+                { icon: Users, t: "Checked in", d: "Front desk sees them join the queue." },
+                { icon: Smile, t: "In the chair", d: "Tooth chart, notes and X-rays open together." },
+                { icon: Boxes, t: "Materials used", d: "Stock updates from the treatment itself." },
+                { icon: Wallet, t: "Paid", d: "Invoice or payment plan, on the same file." },
+              ].map((s, i) => (
+                <motion.li key={s.t} initial="hidden" whileInView="show" viewport={viewport} variants={reveal} className="eye-panel relative w-[72%] shrink-0 snap-start rounded-2xl p-5 sm:w-[45%] md:w-auto">
+                  <span className="mb-4 flex items-center gap-2">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground">{i + 1}</span>
+                    <s.icon className="h-4 w-4 text-primary" />
+                  </span>
+                  <h3 className="mb-1 text-base font-semibold text-card-foreground">{s.t}</h3>
+                  <p className="text-sm leading-snug text-muted-foreground">{s.d}</p>
+                </motion.li>
+              ))}
+            </ol>
           </section>
 
           <motion.h2 initial="hidden" whileInView="show" viewport={viewport} variants={reveal} className="mb-4 text-2xl font-bold text-foreground md:text-3xl">
